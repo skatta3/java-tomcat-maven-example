@@ -4,17 +4,18 @@ phases:
   install:
     runtime-versions:
       java: corretto11
-  pre_build:
-    commands:
-      - echo Nothing to do in the pre_build phase...
   build:
     commands:
-      - echo Build started on `date`
-      - mvn install
+      - mvn clean package
   post_build:
     commands:
-      - echo Build completed on `date`
+      ## aws s3 cp target/*.war s3://myhhbucket23 . We don't need this step.
+      - echo Build completed
 artifacts:
   files:
-    - target/java-tomcat-maven-example.war
-  discard-paths: no
+    - target/*.war
+    - scripts/server_start.sh
+    - scripts/server_stop.sh
+    - appspec.yml
+   
+  discard-paths: yes
