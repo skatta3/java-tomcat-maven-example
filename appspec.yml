@@ -1,7 +1,18 @@
 version: 0.0
 os: linux
+
+files:
+  - source: /java-tomcat-maven-example.war
+    destination: /var/lib/tomcat10/webapps/
+    
+file_exists_behavior: OVERWRITE    
+          
 hooks:
-  BeforeInstall:
-    - location: install.sh
+  AfterInstall:
+    - location: server_start.sh
       timeout: 300
       runas: root
+  ApplicationStop:
+    - location: server_stop.sh
+      timeout: 300
+      runas: root 
