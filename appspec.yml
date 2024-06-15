@@ -5,9 +5,9 @@ os: linux
 files:
   - source: /java-tomcat-maven-example.war
     destination: /var/lib/tomcat10/webapps/
-  - source: scripts/server_start.sh
+  - source: /server_start.sh
     destination: /var/lib/tomcat10/webapps/
-  - source: scripts/server_stop.sh
+  - source: /server_stop.sh
     destination: /var/lib/tomcat10/webapps/
 
    
@@ -15,10 +15,10 @@ file_exists_behavior: OVERWRITE
           
 hooks:
   AfterInstall:
-    - location: scripts/server_start.sh
+    - location: server_start.sh
       timeout: 300
       runas: root
   ApplicationStop:
-    - location: scripts/server_stop.sh
+    - location: server_stop.sh
       timeout: 300
-      runas: root 
+      runas: root
